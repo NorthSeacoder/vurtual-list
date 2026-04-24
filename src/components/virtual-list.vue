@@ -2,7 +2,7 @@
   <div class="viewport" ref="viewport" @scroll="handleScroll">
     <div class="scrollBar" ref="scrollBar"></div>
     <div class="scroll-list" :style="{transform:`translate3d(0,${offset}px,0)`}">
-      <div v-for="(item,index) in visibleData" :key="item.id" :vid="item.index" ref="items">
+      <div v-for="(item) in visibleData" :key="item.id" :vid="item.index" ref="items">
         <slot :item="item"></slot>
       </div>
     </div>

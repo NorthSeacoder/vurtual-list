@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <virtual-list
+    <!-- <virtual-list
       :size="80"
       :remain="8"
       :items="items"
@@ -9,25 +9,40 @@
       <Item 
         slot-scope="{item}" 
         :item="item"/>
-    </virtual-list>
+    </virtual-list> -->
+  <!-- <vl :data="items"></vl> -->
+  <b-virtual-list 
+    ref="menu" 
+    :map="currentMap"
+    ></b-virtual-list>
   </div>
 </template>
 <script>
-import VirtualList from './components/virtual-list';
+// import VirtualList from './components/virtual-list';
+import BVirtualList from './components/b-vurtual-list';
+import vl from './components/vl';
 import Item from './components/item';
+import Enum from './enum'
 import Mock from 'mockjs'
 let items = [];
-for(let i = 0 ; i<1000 ; i++){
-  items.push({id:i,value:Mock.Random.sentence()});
+for(let i = 0 ; i<100 ; i++){
+  items.push({id:i,value:i});
 }
+const MockTemplate = {'Selected|100':[{id:'@zip',name:'@cname'}]} 
 export default {
   name: 'App',
   data(){
-    return {items}
+        const {Selected}=Mock.mock(MockTemplate)
+    return {
+      items,
+      currentMap:Enum.from(Selected).MAP
+      }
   },
   components:{
-    VirtualList,
-    Item
+    // VirtualList,
+    BVirtualList,
+    // Item,
+    vl
   }
 }
 </script>
